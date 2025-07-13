@@ -7,42 +7,42 @@ const ramosPorSemestre = {
     { id: 5, nombre: "Comunicación Oral", prerequisitos: [] }
   ],
   "2do Semestre": [
-    { id: 6, nombre: "Persona y Acto Jurídico", prerequisitos: [1, 2, 3, 4, 5] },
-    { id: 7, nombre: "Derecho Constitucional Orgánico", prerequisitos: [1, 2, 3, 4, 5] },
-    { id: 8, nombre: "Introducción al Derecho I", prerequisitos: [1, 2, 3, 4, 5] },
-    { id: 9, nombre: "Bases Generales del Derecho Procesal", prerequisitos: [1, 2, 3, 4, 5] }
+    { id: 6, nombre: "Persona y Acto Jurídico", prerequisitos: [1] },
+    { id: 7, nombre: "Derecho Constitucional Orgánico", prerequisitos: [2] },
+    { id: 8, nombre: "Introducción al Derecho I", prerequisitos: [3] },
+    { id: 9, nombre: "Bases Generales del Derecho Procesal", prerequisitos: [3] }
   ],
   "3er Semestre": [
-    { id: 10, nombre: "Derechos Reales y Derecho Inmobiliario", prerequisitos: [6, 7, 8, 9] },
-    { id: 11, nombre: "Derechos Fundamentales", prerequisitos: [6, 7, 8, 9] },
-    { id: 12, nombre: "Introducción al Derecho II", prerequisitos: [6, 7, 8, 9] },
-    { id: 13, nombre: "Economía y Derecho", prerequisitos: [6, 7, 8, 9] }
+    { id: 10, nombre: "Derechos Reales y Derecho Inmobiliario", prerequisitos: [6] },
+    { id: 11, nombre: "Derechos Fundamentales", prerequisitos: [7] },
+    { id: 12, nombre: "Introducción al Derecho II", prerequisitos: [8] },
+    { id: 13, nombre: "Economía y Derecho", prerequisitos: [4] }
   ],
   "4to Semestre": [
-    { id: 14, nombre: "Derecho de las Obligaciones", prerequisitos: [10, 11, 12, 13] },
-    { id: 15, nombre: "Derecho Penal Parte General I", prerequisitos: [10, 11, 12, 13] },
-    { id: 16, nombre: "Taller Destrezas en Litigación Oral", prerequisitos: [10, 11, 12, 13] },
-    { id: 17, nombre: "Derecho Regulatorio", prerequisitos: [10, 11, 12, 13] }
+    { id: 14, nombre: "Derecho de las Obligaciones", prerequisitos: [10] },
+    { id: 15, nombre: "Derecho Penal Parte General I", prerequisitos: [12] },
+    { id: 16, nombre: "Taller Destrezas en Litigación Oral", prerequisitos: [5, 9, 10, 11, 12] },
+    { id: 17, nombre: "Derecho Regulatorio", prerequisitos: [13] }
   ],
   "5to Semestre": [
-    { id: 18, nombre: "Derecho de Daños", prerequisitos: [14, 15, 16, 17] },
-    { id: 19, nombre: "Derecho Internacional Público", prerequisitos: [14, 15, 16, 17] },
-    { id: 20, nombre: "Derecho Penal Parte General II", prerequisitos: [14, 15, 16, 17] },
-    { id: 21, nombre: "Procedimientos Judiciales", prerequisitos: [14, 15, 16, 17] },
-    { id: 22, nombre: "Derecho Comercial", prerequisitos: [14, 15, 16, 17] }
+    { id: 18, nombre: "Derecho de Daños", prerequisitos: [15] },
+    { id: 19, nombre: "Derecho Internacional Público", prerequisitos: [11] },
+    { id: 20, nombre: "Derecho Penal Parte General II", prerequisitos: [12, 14] },
+    { id: 21, nombre: "Procedimientos Judiciales", prerequisitos: [16] },
+    { id: 22, nombre: "Derecho Comercial", prerequisitos: [17] }
   ],
   "6to Semestre": [
-    { id: 23, nombre: "Contratos", prerequisitos: [18, 19, 20, 21, 22] },
-    { id: 24, nombre: "Derecho Administrativo", prerequisitos: [18, 19, 20, 21, 22] },
-    { id: 25, nombre: "Derecho Penal Parte Especial", prerequisitos: [18, 19, 20, 21, 22] },
-    { id: 26, nombre: "Derecho Societario", prerequisitos: [18, 19, 20, 21, 22] }
+    { id: 23, nombre: "Contratos", prerequisitos: [4, 18] },
+    { id: 24, nombre: "Derecho Administrativo", prerequisitos: [19] },
+    { id: 25, nombre: "Derecho Penal Parte Especial", prerequisitos: [20] },
+    { id: 26, nombre: "Derecho Societario", prerequisitos: [22] }
   ],
   "7mo Semestre": [
-    { id: 27, nombre: "Derecho de Familia y Sucesorio", prerequisitos: [23, 24, 25, 26] },
-    { id: 28, nombre: "Derecho y Medio Ambiente", prerequisitos: [23, 24, 25, 26] },
-    { id: 29, nombre: "Proceso Penal", prerequisitos: [23, 24, 25, 26] },
-    { id: 30, nombre: "Taller de Negociación en Procesos Colaborativos", prerequisitos: [23, 24, 25, 26] },
-    { id: 31, nombre: "Derecho Tributario", prerequisitos: [23, 24, 25, 26] }
+    { id: 27, nombre: "Derecho de Familia y Sucesorio", prerequisitos: [23] },
+    { id: 28, nombre: "Derecho y Medio Ambiente", prerequisitos: [24] },
+    { id: 29, nombre: "Proceso Penal", prerequisitos: [25] },
+    { id: 30, nombre: "Taller de Negociación en Procesos Colaborativos", prerequisitos: [21] },
+    { id: 31, nombre: "Derecho Tributario", prerequisitos: [17] }
   ],
   "8vo Semestre": [
     { id: 32, nombre: "Clínicas Jurídicas (o Pasantía Supervisada)", prerequisitos: [27, 28, 29, 30, 31] },
