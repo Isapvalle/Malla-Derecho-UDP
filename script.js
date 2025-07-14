@@ -88,7 +88,6 @@ function crearTitulo(semestre) {
 
   bloque.appendChild(h2);
   malla.appendChild(bloque);
-
   return bloque;
 }
 
@@ -107,6 +106,7 @@ function cargarMalla() {
     const contenedor = crearTitulo(semestre);
     ramos.forEach(ramo => crearRamo(ramo, contenedor));
   }
+  cargarProgreso();
   actualizarRamos();
 }
 
@@ -120,13 +120,17 @@ function aprobarRamo(id) {
 
 function actualizarRamos() {
   const todosLosRamos = Object.values(ramosPorSemestre).flat();
+  let aprobadosCount = 0;
+
   todosLosRamos.forEach(ramo => {
     const div = document.querySelector(`.ramo[data-id='${ramo.id}']`);
     const aprobado = div.classList.contains("aprobado");
+
     const requisitosCumplidos = ramo.prerequisitos.every(req => {
       const reqDiv = document.querySelector(`.ramo[data-id='${req}']`);
-      return reqDiv.classList.contains("aprobado");
+      return reqDiv && reqDiv.classList.contains("aprobado");
     });
+
     if (!aprobado && requisitosCumplidos) {
       div.classList.add("activo");
       div.style.cursor = "pointer";
@@ -134,7 +138,14 @@ function actualizarRamos() {
       div.classList.remove("activo");
       div.style.cursor = "not-allowed";
     }
+
+    if (aprobado) aprobadosCount++;
   });
+
+  const progreso = Math.round((aprobadosCount / todosLosRamos.length) * 100);
+  document.getElementById("barra-progreso").style.width = progreso + "%";
+  const textoPorcentaje = document.getElementById("porcentaje-texto");
+  if (textoPorcentaje) textoPorcentaje.innerText = `${progreso}%`;
 }
 
 function reiniciarMalla() {
@@ -146,8 +157,7 @@ function reiniciarMalla() {
 }
 
 function guardarProgreso() {
-  const aprobados = Array.from(document.querySelectorAll('.ramo.aprobado'))
-    .map(div => div.dataset.id);
+  const aprobados = Array.from(document.querySelectorAll(".ramo.aprobado")).map(div => div.dataset.id);
   localStorage.setItem("ramosAprobados", JSON.stringify(aprobados));
 }
 
@@ -161,7 +171,14 @@ function cargarProgreso() {
   });
 }
 
+function alternarModo() {
+  document.body.classList.toggle("oscuro");
+  localStorage.setItem("modoOscuro", document.body.classList.contains("oscuro"));
+}
+
 window.onload = () => {
   cargarMalla();
-  cargarProgreso();
+  if (localStorage.getItem("modoOscuro") === "true") {
+    document.body.classList.add("oscuro");
+  }
 };
