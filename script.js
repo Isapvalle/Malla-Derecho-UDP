@@ -83,9 +83,6 @@ function crearTitulo(semestre) {
 
   const h2 = document.createElement("h2");
   h2.innerText = semestre;
-  h2.style.marginTop = "30px";
-  h2.style.color = "#00569D";
-
   bloque.appendChild(h2);
   malla.appendChild(bloque);
 
@@ -123,9 +120,21 @@ function actualizarRamos() {
   const todosLosRamos = Object.values(ramosPorSemestre).flat();
   let aprobadosCount = 0;
 
+  for (const [semestre, ramos] of Object.entries(ramosPorSemestre)) {
+    const bloque = document.querySelector(`h2:contains("${semestre}")`)?.parentElement;
+    if (bloque) bloque.classList.remove("completo");
+    const todosAprobados = ramos.every(ramo =>
+      document.querySelector(`.ramo[data-id='${ramo.id}']`)?.classList.contains("aprobado")
+    );
+    if (bloque && todosAprobados) {
+      bloque.classList.add("completo");
+    }
+  }
+
   todosLosRamos.forEach(ramo => {
     const div = document.querySelector(`.ramo[data-id='${ramo.id}']`);
     const aprobado = div.classList.contains("aprobado");
+
     const requisitosCumplidos = ramo.prerequisitos.every(req => {
       const reqDiv = document.querySelector(`.ramo[data-id='${req}']`);
       return reqDiv && reqDiv.classList.contains("aprobado");
@@ -144,8 +153,7 @@ function actualizarRamos() {
 
   const progreso = Math.round((aprobadosCount / todosLosRamos.length) * 100);
   document.getElementById("barra-progreso").style.width = progreso + "%";
-  const texto = document.getElementById("porcentaje-texto");
-  if (texto) texto.innerText = `${progreso}%`;
+  document.getElementById("porcentaje-texto").innerText = `${progreso}%`;
 }
 
 function reiniciarMalla() {
@@ -157,7 +165,8 @@ function reiniciarMalla() {
 }
 
 function guardarProgreso() {
-  const aprobados = Array.from(document.querySelectorAll(".ramo.aprobado")).map(div => div.dataset.id);
+  const aprobados = Array.from(document.querySelectorAll('.ramo.aprobado'))
+    .map(div => div.dataset.id);
   localStorage.setItem("ramosAprobados", JSON.stringify(aprobados));
 }
 
