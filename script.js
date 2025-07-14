@@ -88,6 +88,7 @@ function crearTitulo(semestre) {
 
   bloque.appendChild(h2);
   malla.appendChild(bloque);
+
   return bloque;
 }
 
@@ -125,7 +126,6 @@ function actualizarRamos() {
   todosLosRamos.forEach(ramo => {
     const div = document.querySelector(`.ramo[data-id='${ramo.id}']`);
     const aprobado = div.classList.contains("aprobado");
-
     const requisitosCumplidos = ramo.prerequisitos.every(req => {
       const reqDiv = document.querySelector(`.ramo[data-id='${req}']`);
       return reqDiv && reqDiv.classList.contains("aprobado");
@@ -144,8 +144,8 @@ function actualizarRamos() {
 
   const progreso = Math.round((aprobadosCount / todosLosRamos.length) * 100);
   document.getElementById("barra-progreso").style.width = progreso + "%";
-  const textoPorcentaje = document.getElementById("porcentaje-texto");
-  if (textoPorcentaje) textoPorcentaje.innerText = `${progreso}%`;
+  const texto = document.getElementById("porcentaje-texto");
+  if (texto) texto.innerText = `${progreso}%`;
 }
 
 function reiniciarMalla() {
