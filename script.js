@@ -120,14 +120,22 @@ function actualizarRamos() {
   const todosLosRamos = Object.values(ramosPorSemestre).flat();
   let aprobadosCount = 0;
 
+  const animados = JSON.parse(localStorage.getItem("semestresAnimados") || "{}");
+
   for (const [semestre, ramos] of Object.entries(ramosPorSemestre)) {
-    const bloque = document.querySelector(`h2:contains("${semestre}")`)?.parentElement;
+    const h2 = Array.from(document.querySelectorAll("h2")).find(el => el.innerText.trim() === semestre);
+    const bloque = h2?.parentElement;
+
     if (bloque) bloque.classList.remove("completo");
+
     const todosAprobados = ramos.every(ramo =>
       document.querySelector(`.ramo[data-id='${ramo.id}']`)?.classList.contains("aprobado")
     );
-    if (bloque && todosAprobados) {
+
+    if (bloque && todosAprobados && !animados[semestre]) {
       bloque.classList.add("completo");
+      animados[semestre] = true;
+      localStorage.setItem("semestresAnimados", JSON.stringify(animados));
     }
   }
 
@@ -161,12 +169,12 @@ function reiniciarMalla() {
     div.classList.remove("aprobado");
   });
   localStorage.removeItem("ramosAprobados");
+  localStorage.removeItem("semestresAnimados");
   actualizarRamos();
 }
 
 function guardarProgreso() {
-  const aprobados = Array.from(document.querySelectorAll('.ramo.aprobado'))
-    .map(div => div.dataset.id);
+  const aprobados = Array.from(document.querySelectorAll(".ramo.aprobado")).map(div => div.dataset.id);
   localStorage.setItem("ramosAprobados", JSON.stringify(aprobados));
 }
 
