@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Malla Derecho UDP</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
   <h1>Malla Derecho UDP</h1>
-  <button id="reset-btn" onclick="reiniciarMalla()">Reiniciar todo</button>
+
+  <button onclick="reiniciarMalla()" id="reset-btn">🔁 Reiniciar todo</button>
+  <button onclick="alternarModo()" id="modo-btn">🌓 Modo Claro/Oscuro</button>
+
+  <div id="barra-progreso-container">
+    <div id="barra-progreso">
+      <span id="porcentaje-texto">0%</span>
+    </div>
+  </div>
 
   <div id="malla" class="malla-container"></div>
 
